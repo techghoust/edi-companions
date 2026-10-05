@@ -1,0 +1,17 @@
+.github/**
+.vscode/**
+src/**
+test/**
+node_modules/**
+artifacts/**
+esbuild.mjs
+tsconfig.json
+vitest.config.ts
+**/*.map
+*.vsix
+*.log
+.npm-cache/**
+jetbrains-plugin/**
+.gitignore
+jetbrains-plugin/**
+vitest.config.mts

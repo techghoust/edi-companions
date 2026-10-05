@@ -1,0 +1,90 @@
+{
+  "name": "edi-vscode",
+  "displayName": "EDI Developer Journal Companion",
+  "description": "A lightweight local bridge between VS Code, JetBrains IDEs and EDI Developer Journal.",
+  "version": "0.3.0",
+  "publisher": "techghoust",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/techghoust/edi-vscode.git"
+  },
+  "homepage": "https://github.com/techghoust/edi-vscode#readme",
+  "bugs": {
+    "url": "https://github.com/techghoust/edi-vscode/issues"
+  },
+  "engines": {
+    "vscode": "^1.96.0"
+  },
+  "categories": ["Other"],
+  "keywords": ["developer journal", "project memory", "decisions", "local-first", "pycharm", "webstorm", "clion"],
+  "extensionKind": ["ui"],
+  "main": "./dist/extension.js",
+  "icon": "images/icon.png",
+  "activationEvents": [],
+  "contributes": {
+    "commands": [
+      { "command": "edi.openProject", "title": "Open Project in EDI", "category": "EDI" },
+      { "command": "edi.addNote", "title": "Add Note", "category": "EDI" },
+      { "command": "edi.addDecision", "title": "Add Decision", "category": "EDI" },
+      { "command": "edi.addExperiment", "title": "Add Experiment", "category": "EDI" },
+      { "command": "edi.addResearch", "title": "Add Research", "category": "EDI" }
+    ],
+    "submenus": [
+      { "id": "edi.sendToEdi", "label": "Send to EDI" }
+    ],
+    "menus": {
+      "editor/context": [
+        { "submenu": "edi.sendToEdi", "when": "editorTextFocus", "group": "navigation@100" }
+      ],
+      "edi.sendToEdi": [
+        { "command": "edi.addNote", "group": "edi@1" },
+        { "command": "edi.addDecision", "group": "edi@2" },
+        { "command": "edi.addExperiment", "group": "edi@3" },
+        { "command": "edi.addResearch", "group": "edi@4" }
+      ]
+    },
+    "configuration": {
+      "title": "EDI Developer Journal",
+      "properties": {
+        "edi.executablePath": {
+          "type": "string",
+          "default": "",
+          "scope": "application",
+          "description": "Path to the EDI Developer Journal executable or macOS app bundle. Leave empty to use automatic detection."
+        },
+        "edi.autoDetect": {
+          "type": "boolean",
+          "default": true,
+          "scope": "application",
+          "description": "Automatically look for EDI Developer Journal in standard installation locations."
+        },
+        "edi.showSuccessNotifications": {
+          "type": "boolean",
+          "default": true,
+          "scope": "application",
+          "description": "Show a confirmation after EDI opens a project or saves an entry."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "clean": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true});require('node:fs').rmSync('artifacts',{recursive:true,force:true})\"",
+    "typecheck": "tsc --noEmit",
+    "build": "npm run typecheck && node esbuild.mjs",
+    "watch": "node esbuild.mjs --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "vscode:prepublish": "npm run build",
+    "package": "npm run clean && npm run build && node -e \"require('node:fs').mkdirSync('artifacts',{recursive:true})\" && vsce package --allow-missing-repository --out artifacts/edi-vscode-0.3.0.vsix"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/vscode": "^1.96.0",
+    "@vscode/test-electron": "^2.5.2",
+    "@vscode/vsce": "^3.6.2",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.7.2",
+    "vitest": "^4.0.0"
+  }
+}

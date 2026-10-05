@@ -1,0 +1,9 @@
+node_modules/
+dist/
+artifacts/
+*.vsix
+*.log
+.DS_Store
+.npm-cache/
+jetbrains-plugin/.gradle/
+jetbrains-plugin/build/

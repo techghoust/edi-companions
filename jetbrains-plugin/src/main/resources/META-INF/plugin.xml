@@ -1,0 +1,34 @@
+<idea-plugin>
+    <id>com.techghoust.edi.companion</id>
+    <name>EDI Developer Journal Companion</name>
+    <vendor>techghoust</vendor>
+    <description><![CDATA[
+        A local bridge between PyCharm, WebStorm, CLion and EDI Developer Journal.
+        Send project and explicitly selected source context to EDI over Integration Protocol v1.
+    ]]></description>
+
+    <idea-version since-build="252" />
+    <depends>com.intellij.modules.platform</depends>
+
+    <actions>
+        <group id="EdiCompanion.MainMenu" text="EDI" popup="true">
+            <action id="EdiCompanion.OpenProject" class="com.techghoust.edi.companion.OpenProjectAction" text="Open Project in EDI" />
+            <action id="EdiCompanion.ConfigureExecutable" class="com.techghoust.edi.companion.ConfigureExecutableAction" text="Configure EDI Executable" />
+            <group id="EdiCompanion.SendToEdi" text="Send to EDI" popup="true">
+                <action id="EdiCompanion.AddNote" class="com.techghoust.edi.companion.AddNoteAction" text="Add Note" />
+                <action id="EdiCompanion.AddDecision" class="com.techghoust.edi.companion.AddDecisionAction" text="Add Decision" />
+                <action id="EdiCompanion.AddExperiment" class="com.techghoust.edi.companion.AddExperimentAction" text="Add Experiment" />
+                <action id="EdiCompanion.AddResearch" class="com.techghoust.edi.companion.AddResearchAction" text="Add Research" />
+            </group>
+            <add-to-group group-id="ToolsMenu" anchor="last" />
+        </group>
+
+        <group id="EdiCompanion.EditorPopup" text="Send to EDI" popup="true">
+            <action id="EdiCompanion.EditorAddNote" class="com.techghoust.edi.companion.AddNoteAction" text="Add Note" />
+            <action id="EdiCompanion.EditorAddDecision" class="com.techghoust.edi.companion.AddDecisionAction" text="Add Decision" />
+            <action id="EdiCompanion.EditorAddExperiment" class="com.techghoust.edi.companion.AddExperimentAction" text="Add Experiment" />
+            <action id="EdiCompanion.EditorAddResearch" class="com.techghoust.edi.companion.AddResearchAction" text="Add Research" />
+            <add-to-group group-id="EditorPopupMenu" anchor="last" />
+        </group>
+    </actions>
+</idea-plugin>
